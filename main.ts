@@ -2,8 +2,17 @@ type Status = "playing" | "paused" | "finished";
 type Genre = "action" | "rhythm" | "simulation" | "other";
 
 type GameFilter = (game: Game) => boolean;
+type GameTitleGetter = (game: Game) => string;
 
-type Game = {
+/**type Game = {
+    id: number;
+    title: string;
+    playHour: number;
+    status: Status;
+    genre: Genre;
+};**/
+
+interface Game {
     id: number;
     title: string;
     playHour: number;
@@ -77,3 +86,27 @@ const isLongGame: GameFilter = (game: Game) => {
     return game.playHour >= 200;
 }
 const longGames: Game[] = games.filter(isLongGame);
+
+const getTitle: GameTitleGetter = (game: Game) => {
+    return game.title;
+}
+
+function filterGames(
+    games: Game[],
+    filter: GameFilter
+): Game[] {
+    return games.filter(filter);
+}
+const longGames_ = filterGames(games, isLongGame);
+
+const isSimulationGame: GameFilter = (game) => {
+    return game.genre === "simulation";
+}
+const simulationGames = filterGames(games, isSimulationGame);
+
+function findFirst<T>(
+    items: T[], 
+    predicate: (item: T) => boolean
+): T | undefined {
+    return items.filter(predicate).at(0);
+}
