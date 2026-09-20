@@ -110,3 +110,40 @@ function findFirst<T>(
 ): T | undefined {
     return items.filter(predicate).at(0);
 }
+
+/**async function getNumber(): Promise<number> {
+    return 124;
+}
+async function main(): Promise<void> {
+    const result = await getNumber();
+    console.log(result);
+}
+
+function waitOneSecond(): Promise<string> {
+    return new Promise<strung>((resolve) => {
+        setTimeout(() => {
+            resolve("完了！");
+        }, 1000);
+    })
+}
+async function main_(): Promise<void> {
+    const result = await waitOneSecond();
+    console.log(result);
+}
+
+async function getGames(): Promise<Game[]> {
+    return games;
+}
+async function main(): Promise<void> {
+    const gameArray = await getGames();
+    for (let i = 0; i < gameArray.length; i++) {
+        console.log(gameArray[i].title);
+    }
+}**/
+
+async function main() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+    console.log(data);
+}
+main();
